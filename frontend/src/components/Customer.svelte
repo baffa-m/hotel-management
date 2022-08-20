@@ -3,12 +3,15 @@
     import Button from "./shared/Button.svelte";
     import { createEventDispatcher } from 'svelte'
 
+    let dispatch = createEventDispatcher()
+
     const postData = {
         name: '',
         address: '',
         phone_no: '',
         email: ''
     }
+    let result
 
     const formHandler = async () => {
         
@@ -21,7 +24,7 @@
         })
         const json = await res.json()
         result = JSON.stringify(json)
-        console.log(postData)
+        dispatch('add', postData)
         
     }
 

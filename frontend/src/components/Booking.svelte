@@ -7,7 +7,7 @@ let dispatch = createEventDispatcher();
 
 
 
-let fields = {chekin_date: '', chekout_date: '', roomType: '', price: ''}
+let fields = {chekin_date: '', chekout_date: '', roomType: '', price: '', guest_id: ''}
 let err = {chekin: '', checkout: ''}
 let valid = false;
 

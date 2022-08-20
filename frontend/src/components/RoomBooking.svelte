@@ -14,17 +14,10 @@ import { onMount } from "svelte";
 
     onMount(async () => {
         const res = await fetch('http://localhost:8000/guest/')
-        roomTypes = await res.json()
-        console.log(roomTypes)
+        guests = await res.json()
     })
     
     const dispatch = createEventDispatcher()
-    const formHandler = () => {
-
-
-       
-    }
-
 
 
     let items = ['Booking Details', 'Room Type', 'Personal Details', 'Summary']
@@ -49,6 +42,29 @@ import { onMount } from "svelte";
         activeItem = 'Personal Details'
     }
 
+    let guestArray
+    const getguests = (e) => {
+        guestArray = e.detail
+        console.log(guestArray)
+        
+        activeItem = 'Summary'
+    }
+
+    
+    
+
+    const formHandler = () => {
+        console.log(guests)
+        for (let i = 0; i < guests.length; i++) {
+            console.log(guests[i])
+            console.log(guests[i].phone_no)
+            if (guests[i].phone_no === guestArray.phone_no) {
+                console.log(guests[i].id)
+            }
+        }
+       
+    }
+
    
 </script>
 <Tabs {items} {activeItem}  />
@@ -57,32 +73,36 @@ import { onMount } from "svelte";
 {:else if activeItem === 'Room Type'}
 <Rooms on:add={getRoomType} />
 {:else if activeItem === 'Personal Details'}
-<Customer />
+<Customer on:add={getguests} />
 {:else if activeItem === 'Summary'}
-<table class="table table=bordered">
-    <tr>
-        <th>Name</th>
-        <td></td>
-    </tr>
-    <tr>
-        <th>Check In</th>
-        <td></td>
-    </tr>
-    <tr>
-        <th>Check Out</th>
-        <td></td>
-    </tr>
-    <tr>
-        <th>Total Amount</th>
-        <td></td>
-    </tr>
-    <tr>
-        <th>Payment Status</th>
-        <td></td>
-    </tr>
-    
-</table>
-<Button>Submit</Button>
+<form on:submit|preventDefault={formHandler}>
+    <table class="table table=bordered">
+        <tr>
+            <th>Name</th>
+            <td><h3>{guestArray.name}</h3></td>
+        </tr>
+        <tr>
+            <th>Check In</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Check Out</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Total Amount</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Payment Status</th>
+            <td></td>
+        </tr>
+        
+    </table>
+    <div>
+        <Button>Submit</Button>
+    </div>
+</form>
 {/if}
 
 
