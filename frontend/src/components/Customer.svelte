@@ -24,7 +24,9 @@
         })
         const json = await res.json()
         result = JSON.stringify(json)
-        dispatch('add', postData)
+        let guest = JSON.parse(result)
+        console.log(guest)
+        dispatch('add', guest)
         
     }
 

@@ -17,52 +17,77 @@ import { onMount } from "svelte";
         guests = await res.json()
     })
     
-    const dispatch = createEventDispatcher()
 
-
-    let items = ['Booking Details', 'Room Type', 'Personal Details', 'Summary']
-    let activeItem = 'Booking Details'
+    let items = ['Personal Details', 'Booking Details', 'Room Type', 'Summary']
+    let activeItem = 'Personal Details'
 
     let bookinginfo
 
     const handleAdd = (e) => {
         bookinginfo = e.detail;
         activeItem = 'Room Type'
+        console.log(bookinginfo)
 
+        
     }
-    
+
 
     const getRoomType = (e) => {
         let id = e.detail.id
         let price = e.detail.price
-        bookinginfo.roomType = id
+        bookinginfo.room_id = id
         bookinginfo.price = price
-        
-        console.log(bookinginfo)
-        activeItem = 'Personal Details'
+        bookinginfo.total_price = bookinginfo.price * bookinginfo.total_days
+
+        for (let i = 0; i < guests.length; i++) {
+            if (guests[i].phone_no === guestArray.phone_no) {
+                bookinginfo.guest_id = guests[i].id
+            }
+        }
+
+                
+        activeItem = 'Summary'
     }
 
     let guestArray
     const getguests = (e) => {
         guestArray = e.detail
         console.log(guestArray)
-        
-        activeItem = 'Summary'
+          
+        activeItem = 'Booking Details'
     }
 
+ 
     
-    
+    let postData = {
+        checkin_date: '',
+        checkout_date: '',
+        guest_id: '',
+        room_id: '',
+        total_price: '',
+        payment_status: ''
 
-    const formHandler = () => {
-        console.log(guests)
-        for (let i = 0; i < guests.length; i++) {
-            console.log(guests[i])
-            console.log(guests[i].phone_no)
-            if (guests[i].phone_no === guestArray.phone_no) {
-                console.log(guests[i].id)
-            }
-        }
-       
+    }
+    let result
+    const formHandler = async () => {
+
+                        
+        postData.checkin_date = bookinginfo.chekin_date
+        postData.checkout_date = bookinginfo.chekout_date
+        postData.guest_id = bookinginfo.guest_id
+        postData.room_id = bookinginfo.room_id
+        postData.total_price = bookinginfo.total_price
+        postData.payment_status = false
+
+        const res = await fetch('http://localhost:8000/reservations/', {
+            method: 'POST',
+            headers : { "content-type" : "application/json"},
+            body: JSON.stringify(postData)
+    
+        })
+        const json = await res.json()
+        result = JSON.stringify(json) 
+        activeItem === 'Personal Info'
     }
 
    
@@ -79,23 +104,23 @@ import { onMount } from "svelte";
     <table class="table table=bordered">
         <tr>
             <th>Name</th>
-            <td><h3>{guestArray.name}</h3></td>
+            <td>{guestArray.name}</td>
         </tr>
         <tr>
             <th>Check In</th>
-            <td></td>
+            <td>{bookinginfo.chekin_date}</td>
         </tr>
         <tr>
             <th>Check Out</th>
-            <td></td>
+            <td>{bookinginfo.chekout_date}</td>
         </tr>
         <tr>
             <th>Total Amount</th>
-            <td></td>
+            <td>{bookinginfo.total_price}</td>
         </tr>
         <tr>
             <th>Payment Status</th>
-            <td></td>
+            <td>Unpaid</td>
         </tr>
         
     </table>

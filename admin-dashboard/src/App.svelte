@@ -16,7 +16,7 @@ import BookedRooms from "./components/BookedRooms.svelte";
 	
 
 	let items = ['Home', 'Bookings', 'Booked Rooms', 'Guests', 'Room Types', 'Rooms', 'Hall']
-	let activeItem = 'Home'
+	let activeItem = 'Bookings'
 
 	const tabChange = (e) => {
 		activeItem = e.detail;

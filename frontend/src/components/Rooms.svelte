@@ -14,7 +14,7 @@ import RoomType from '../../../admin-dashboard/src/components/RoomType.svelte';
     let errMsg = ''
 
     onMount(async () => {
-        const res = await fetch('http://localhost:8000/room-type/')
+        const res = await fetch('http://localhost:8000/room/')
         roomTypes = await res.json()
         console.log(roomTypes)
     })
@@ -48,10 +48,12 @@ import RoomType from '../../../admin-dashboard/src/components/RoomType.svelte';
         <div class="row row-cols-3">
             {#each roomTypes as roomType (roomType.id)}
             <div class="col">
-                <h3>{roomType.room_type}</h3>
-            <p>{roomType.description}</p>
-            <p><b>₦{roomType.cost}/day</b></p>
-            <Button inverse on:click={formHandler(roomType.id, roomType.cost)}>Select</Button>
+                <h3>{roomType.room_type.room_type}</h3>
+                <p>Room Type</p>
+                <h5>Room {roomType.room_name}</h5>
+                <p>{roomType.description}</p>
+                <p><b>₦{roomType.room_type.cost}/day</b></p>
+                <Button inverse on:click={formHandler(roomType.id, roomType.room_type.cost)}>Select</Button>
             </div>
             {/each}          
         </div>

@@ -23,13 +23,13 @@
                 </tr>
             </thead>
             <tbody>
-                {#each bookings as booking (bookings.id)}
+                {#each bookings as booking (booking.id)}
                     <tr>
                         <td>{booking.id}</td>
-                        <td>{bookings.booking_date}</td>
-                        <td>{bookings.checkin_date}</td>
-                        <td>{bookings.checkout_date}</td>
-                        <td>{bookings.checkout_time}</td>
+                        <td>{booking.booking_date}</td>
+                        <td>{booking.checkin_date}</td>
+                        <td>{booking.checkout_date}</td>
+                        <td>{booking.checkout_time}</td>
                     </tr>
                 {/each}
             </tbody>

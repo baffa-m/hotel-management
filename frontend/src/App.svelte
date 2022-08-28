@@ -7,11 +7,16 @@ import RoomBooking from "./components/RoomBooking.svelte";
 import HallBooking from "./components/HallBooking.svelte";
 import PoolBooking from "./components/PoolBooking.svelte";
 import Modal from "./components/shared/Modal.svelte"
+import Login from "./components/Login.svelte";
 
 
 
-let items = ['Home', 'About', 'Register']
+let items = ['Home', 'About', 'Register', 'Login']
 let activeItem = 'Home'
+
+const tabChange = (e) => {
+	activeItem = e.detail
+}
 
 const options = [
 		{ tab: 'Room',   component: RoomBooking   },
@@ -19,14 +24,14 @@ const options = [
 		{ tab: 'Pool',  component: PoolBooking  },
 	];
 
-	let selected = options[0];
+	let selected = options[1];
 
 
 </script>
-<Tabs {items} {activeItem}></Tabs>
+<Tabs {items} {activeItem} on:tabChange={tabChange}></Tabs>
 <main>
 	<Card>
-
+	{#if activeItem === 'Home'}
 		<select bind:value={selected}>
 			{#each options as option}
 				<option value={option}>{option.tab}</option>
@@ -34,6 +39,9 @@ const options = [
 		</select>
 		<br />		
 		<svelte:component this={selected.component} />
+	{:else if activeItem === 'Login'}
+		<Login />
+	{/if}
 	</Card>
 </main>
 <Footer />

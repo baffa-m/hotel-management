@@ -7,7 +7,7 @@ let dispatch = createEventDispatcher();
 
 
 
-let fields = {chekin_date: '', chekout_date: '', roomType: '', price: '', guest_id: ''}
+let fields = {chekin_date: '', chekout_date: '', room_id: '', price: '', total_price: '', guest_id: '', total_days: ''}
 let err = {chekin: '', checkout: ''}
 let valid = false;
 
@@ -17,8 +17,11 @@ const formHandler = () => {
     //validate booking
     let current_date = new Date(formatDate(new Date ))
     let chekin = new Date (fields.chekin_date)
+    let checkout = new Date (fields.chekout_date)
     let difference = Math.abs(chekin - current_date)
     let days = difference/(1000 * 3600 * 24)
+    let totalDays = Math.abs(checkout - chekin) / (1000 * 3600 * 24)
+    fields.total_days = totalDays
 
     if (fields.chekin_date === '') {
         valid = false
