@@ -13,6 +13,14 @@ from fastapi.security import OAuth2PasswordRequestForm
 router = APIRouter()
 
 
+@router.post("/user", response_model=schemas.showUser, tags=['users'])
+def create_user(request: schemas.UserBase, db: Session = Depends(get_db)):
+    new_user = models.User(username = request.username, password = Hash.bcrypt(request.password))
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
+
 @router.post("/login", tags=['Authentication'])
 def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.username == request.username).first()

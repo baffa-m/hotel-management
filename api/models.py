@@ -10,11 +10,9 @@ class User(Base):
     __tablename__ = "user"
     
     id = Column(Integer, primary_key=True)
-    firstname = Column(String(100))
-    lastname = Column(String(100))
     username = Column(String(20))
-    password = Column(String(20))
-    is_admin = Column()
+    password = Column(String(200))
+    is_admin = Column(Boolean, default=False)
 
 class Booking(Base):
     __tablename__ = "bookingTable"

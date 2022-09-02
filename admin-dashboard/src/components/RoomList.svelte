@@ -4,6 +4,7 @@ import axios from 'axios'
 import AddRoom from './AddRoom.svelte';
 import RoomList from './RoomList.svelte';
 import Button from "./shared/Button.svelte";
+import { SyncLoader } from 'svelte-loading-spinners'
 
 let rooms = []
 let errMsg = ''
@@ -45,7 +46,13 @@ const deleteRoom = async (id) => {
                 <td>{room.id}</td>
                 <td>{room.room_name}</td>
                 <td>{room.room_type.room_type}</td>
-                <td></td>
+                <td>
+                    {#if room.available === true}
+                    <p>Available</p>
+                    {:else}
+                    <p>Booked</p>
+                    {/if}
+                </td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-primary-red" on:click|preventDefault={() => deleteRoom(room.id)}>Delete</button>

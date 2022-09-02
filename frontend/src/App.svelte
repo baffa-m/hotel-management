@@ -12,7 +12,7 @@ import Login from "./components/Login.svelte";
 
 
 let items = ['Home', 'About', 'Register', 'Login']
-let activeItem = 'Home'
+let activeItem = 'Login'
 
 const tabChange = (e) => {
 	activeItem = e.detail

@@ -5,6 +5,7 @@
     let postData = {
         room_name: '',
         room_typeid: '',
+        available: 1
     }
     let valid = false
     let errors = {room_name: '', room_type: ''};

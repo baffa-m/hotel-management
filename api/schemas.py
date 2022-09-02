@@ -3,15 +3,12 @@ from pydantic import BaseModel
 from typing import Optional
 
 class UserBase(BaseModel):
-    firstname: str
-    lastname: str
     username: str
     password: str
+    is_admin: bool
     
     
 class showUser(BaseModel):
-    firstname: str
-    lastname: str
     username: str
     
     class Config():
@@ -48,7 +45,7 @@ class RoomTypeBase(BaseModel):
 class RoomBase(BaseModel):
     room_name: str
     room_typeid: int
-    status: bool
+    available: bool
     class Config():
         orm_mode = True
     

@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios';
+
 import { onMount } from 'svelte'
 
 let rooms = [] 
@@ -8,6 +10,14 @@ onMount(async () => {
     rooms = await res.json()
     console.log(rooms)
 })
+
+const checkOutRoom = async (id) => {
+    try {
+        await axios.patch('http://localhost:8000/room/', {available:0})
+    } catch(e) {
+        console.log(e)
+    }
+}
 
 </script>
 
@@ -24,6 +34,7 @@ onMount(async () => {
         </thead>
         <tbody>
             {#each rooms as room}
+            {#if room.available == 1}
                 <tr>
                     <td>{room.id}</td>
                     <td>{room.room_name}</td>
@@ -31,10 +42,11 @@ onMount(async () => {
                     <td></td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary-red" on:click|preventDefault={() => deleteRoom(room.id)}>Checkout</button>
+                            <button type="button" class="btn btn-primary-red" on:click|preventDefault={() => checkOutRoom(room.id)}>Checkout</button>
                           </div>
                     </td>
                 </tr>
+            {/if}
             {/each}
         </tbody>
     </table>

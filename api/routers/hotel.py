@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from http.client import NOT_FOUND
 from sqlalchemy.orm import Session
+from oauth2 import get_current_user
 import schemas, models
 from database import get_db
 from typing import List
@@ -40,8 +41,7 @@ def remove_roomtype(id: int, db: Session = Depends(get_db)):
   
 @router.post('/room', tags=['Room'])
 async def room(request: schemas.RoomBase, db: Session = Depends(get_db)):
-    new_room = models.Room(room_name = request.room_name, room_typeid = request.room_typeid
-                           )
+    new_room = models.Room(room_name = request.room_name, room_typeid = request.room_typeid, available = request.available)
     db.add(new_room)
     db.commit()
     db.refresh(new_room)
@@ -59,6 +59,15 @@ def remove_room(id: int, db: Session = Depends(get_db)):
     if not room_type:
         raise HTTPException(status_code=NOT_FOUND, detail="Not Found")
     db.delete(room)
+    db.commit()
+    return 'done'
+
+@router.patch('/room/{id}', tags=['Room'])
+def update_room(id: int, db: Session = Depends(get_db)):
+    room = db.query(models.Room).filter(models.Room.id == id).first()
+    if not room_type:
+        raise HTTPException(status_code=NOT_FOUND, detail="Not Found")
+    db.update()
     db.commit()
     return 'done'
 
