@@ -8668,7 +8668,7 @@ var app = (function () {
     			main = element("main");
     			create_component(card.$$.fragment);
     			attr_dev(main, "class", "svelte-yg16s0");
-    			add_location(main, file, 28, 0, 992);
+    			add_location(main, file, 28, 0, 1020);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
