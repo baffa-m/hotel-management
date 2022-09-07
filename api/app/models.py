@@ -85,12 +85,4 @@ class Hall(Base):
     booked = Column(Boolean)
     cost = Column(Integer)
 
-
-class ReserveHall(Base):
-    __tablename__ = "reserveHallTable"
-    id = Column(Integer, primary_key=True)
-    hall_id = Column(Integer, ForeignKey('hallTable.id'))
-    phone_no = Column(String(14))
-    date_from = Column(Date)
-    date_to = Column(Date)
     

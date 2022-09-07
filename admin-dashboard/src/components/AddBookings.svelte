@@ -9,7 +9,7 @@ let postData = {
 }
 
 const formHandler = async () => {    
-        const res = await fetch('http://localhost:8000/reservations/', {
+        const res = await fetch('https://ghwtjp.deta.dev/reservations/', {
             method: 'POST',
             headers : { "content-type" : "application/json"},
             body: JSON.stringify(postData)
@@ -23,7 +23,7 @@ const formHandler = async () => {
 
 let guests = []
 onMount(async () => {
-    const res = await fetch('http://localhost:8000/guest/')
+    const res = await fetch('https://ghwtjp.deta.dev/guest/')
         guests = await res.json()
         console.log(guests)
 })
@@ -44,11 +44,11 @@ onMount(async () => {
         </tr>
         <tr>
             <th>Check-in Date</th>
-            <td><input type="datetime-local" name="checkin date" class="form-control" ></td>
+            <td><input type="date" name="checkin date" class="form-control" ></td>
         </tr>
         <tr>
             <th>Check-out Date</th>
-            <td><input type="datetime-local" name="checkout date" class="form-control" ></td>
+            <td><input type="date" name="checkout date" class="form-control" ></td>
         </tr>
         <tr>
             <th>Booking Date</th>

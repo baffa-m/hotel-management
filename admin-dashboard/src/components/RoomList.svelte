@@ -10,14 +10,14 @@ let rooms = []
 let errMsg = ''
 
 onMount(async () => {
-    const res = await fetch('http://localhost:8000/room/')
+    const res = await fetch('https://ghwtjp.deta.dev/room/')
     rooms = await res.json()
     console.log(rooms)
 })
 
 const deleteRoom = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/room/${id}/`)
+            await axios.delete(`https://ghwtjp.deta.dev/room/${id}/`)
             rooms = rooms.filter((room) => room.id !== id)
             
         } catch (e) {

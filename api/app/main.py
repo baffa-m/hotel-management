@@ -10,7 +10,7 @@ from hashing import Hash
 from oauth2 import get_current_user
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
-from routers import user, hotel
+from routers import user, hotel, hall
 
 app = FastAPI()
 
@@ -30,6 +30,7 @@ app.add_middleware(
 models.Base.metadata.create_all(bind=engine)
 
 app.include_router(hotel.router)
+app.include_router(hall.router)
 app.include_router(user.router)      
 
 

@@ -8,7 +8,7 @@ import { onMount } from "svelte";
     $: persons = []
 
     onMount(async () => {
-        const res = await fetch('http://localhost:8000/guest/')
+        const res = await fetch('https://ghwtjp.deta.dev/guest/')
         persons = await res.json()
         console.log(persons)
     })

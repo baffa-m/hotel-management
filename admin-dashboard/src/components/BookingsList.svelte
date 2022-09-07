@@ -4,7 +4,7 @@
         let bookings = []
     
         onMount(async () => {
-            const res = await fetch('http://localhost:8000/reservations/')
+            const res = await fetch('https://ghwtjp.deta.dev/reservations/')
             bookings = await res.json()
             console.log(bookings)
         })
@@ -20,6 +20,9 @@
                     <th>Booking Date</th>
                     <th>Check-in Date</th>
                     <th>Check-out date</th>
+                    <th>Guest Name</th>
+                    <th>Total Price</th>
+                    <th>Payment Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,13 +32,21 @@
                         <td>{booking.booking_date}</td>
                         <td>{booking.checkin_date}</td>
                         <td>{booking.checkout_date}</td>
-                        <td>{booking.checkout_time}</td>
+                        <td>{booking.guest.name}</td>
+                        <td>{booking.total_price}</td>
+                        <td>
+                            {#if booking.payment_status}
+                                Paid
+
+                            {:else}
+                                Unpaid
+                            {/if}
+                        </td>
                     </tr>
                 {/each}
             </tbody>
         </table>
-        <hr />
-        <hr />
+        <br />
         
     </main>
     
@@ -49,7 +60,7 @@
             text-align: center;
             border: 1px solid;
         }
-        .but{
-            text-align: right;
+        main {
+            text-align: center;
         }
     </style>

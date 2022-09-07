@@ -12,7 +12,7 @@ import Login from "./components/Login.svelte";
 
 
 let items = ['Home', 'About', 'Register', 'Login']
-let activeItem = 'Login'
+let activeItem = 'Home'
 
 const tabChange = (e) => {
 	activeItem = e.detail
@@ -21,10 +21,9 @@ const tabChange = (e) => {
 const options = [
 		{ tab: 'Room',   component: RoomBooking   },
 		{ tab: 'Hall', component: HallBooking },
-		{ tab: 'Pool',  component: PoolBooking  },
 	];
 
-	let selected = options[1];
+	let selected = options[0];
 
 
 </script>

@@ -38,6 +38,16 @@ def remove_roomtype(id: int, db: Session = Depends(get_db)):
     db.delete(room_type)
     db.commit()
     return 'done'
+
+@router.patch('/room-type/{id}', tags=['Room Type'])
+def update_room(id: int, request: schemas.RoomTypeUpdate, db: Session = Depends(get_db)):
+    room = db.query(models.RoomType).filter(models.RoomType.id == id)
+    if not room_type:
+        raise HTTPException(status_code=NOT_FOUND, detail="Not Found")
+    room.update({'description': request.description, 'cost': request.cost})
+    db.commit()
+    return 'done'
+
   
 @router.post('/room', tags=['Room'])
 async def room(request: schemas.RoomBase, db: Session = Depends(get_db)):
@@ -63,11 +73,11 @@ def remove_room(id: int, db: Session = Depends(get_db)):
     return 'done'
 
 @router.patch('/room/{id}', tags=['Room'])
-def update_room(id: int, db: Session = Depends(get_db)):
-    room = db.query(models.Room).filter(models.Room.id == id).first()
+def update_room(id: int, request: schemas.RoomUpdate, db: Session = Depends(get_db)):
+    room = db.query(models.Room).filter(models.Room.id == id)
     if not room_type:
         raise HTTPException(status_code=NOT_FOUND, detail="Not Found")
-    db.update()
+    room.update({'available': request.available, 'checked': request.checked})
     db.commit()
     return 'done'
 
@@ -97,39 +107,10 @@ def book(request: schemas.BookingsBase, db: Session = Depends(get_db)):
     db.refresh(booking)
     return booking
 
-@router.get('/reservations', tags=['Reservations'])
+
+
+
+@router.get('/reservations', response_model=List[schemas.BookingList], tags=['Reservations'])
 def get_bookings(db: Session = Depends(get_db)):
     bookings = db.query(models.Booking).all()
     return bookings
-
-@router.post('/hall', tags=['Hall'])
-def create_hall(request: schemas.HallBase, db: Session = Depends(get_db)):
-    new_hall = models.Hall(hall_name = request.hall_name, seats = request.seats, cost = request.cost)
-    db.add(new_hall)
-    db.commit()
-    db.refresh(new_hall)
-    return new_hall
-
-@router.get('/hall', tags=['Hall'])
-def get_hall(db: Session = Depends(get_db)):
-    halls = db.query(models.Hall).all()
-    return halls
-
-@router.delete('/hall/{id}', tags=['Hall'])
-def get_hall(id: int, db: Session = Depends(get_db)):
-    hall = db.query(models.Hall).filter(models.Hall.id == id).first()
-    if not hall:
-        raise HTTPException(status_code=NOT_FOUND, detail="Not Found")
-    db.delete(hall)
-    db.commit()
-    return 'Hall Deleted'
-
-@router.post('/reservations-hall', tags=['Reservations'])
-def book(request: schemas.HallBookingsBase, db: Session = Depends(get_db)):
-    booking = models.Booking(room_id = request.room_id, guest_id = request.guest_id,
-                             checkin_date = request.checkin_date, checkout_date = request.checkout_date,
-                             total_price = request.total_price, payment_status = request.payment_status)
-    db.add(booking)
-    db.commit()
-    db.refresh(booking)
-    return booking

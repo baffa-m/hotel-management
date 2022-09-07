@@ -4,7 +4,8 @@
     let postData = {
         hall_name: '',
         seats: '',
-        cost: ''
+        cost: '',
+        booked: false
     }
     let valid = false
     let errors = {room_type: '', cost: ''};
@@ -12,7 +13,7 @@
     
     
     const formHandler = async () => {    
-        const res = await fetch('http://localhost:8000/hall/', {
+        const res = await fetch('https://ghwtjp.deta.dev/hall/', {
             method: 'POST',
             headers : { "content-type" : "application/json"},
             body: JSON.stringify(postData)

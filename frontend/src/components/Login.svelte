@@ -11,7 +11,7 @@
     
     
     $: formHandler = async () => {
-        const response = axios.post('http://localhost:8000/login/', 
+        const response = axios.post('https://ghwtjp.deta.dev/login/', 
         {username, password}, 
         {withCredentials: true})
         if (response === 200) {

@@ -1,18 +1,29 @@
 <script>
 import {onMount} from 'svelte'
-import { axios } from 'axios'
-    
+import { writable } from 'svelte/store';
+import Modal from 'svelte-simple-modal';
+import Popup from './Popup.svelte';
+
+
+    const modal = writable(null);
+    let getId 
+    const showModal = (id) => {
+        getId = id
+        console.log(getId)
+        modal.set(Popup)
+    }
+
     $: roomtypes = []
 
     onMount(async () => {
-        const res = await fetch('http://localhost:8000/room-type/')
+        const res = await fetch('https://ghwtjp.deta.dev/room-type/')
         roomtypes = await res.json()
         console.log(roomtypes)
     })
 
 
     const deleteRoom = async (id) => {
-        const res = await fetch(`http://localhost:8000/room-type/${id}/`, {
+        const res = await fetch(`https://ghwtjp.deta.dev/room-type/${id}/`, {
             method: 'DELETE',
             headers: {
                 "Content-type": "application/json"
@@ -36,6 +47,8 @@ import { axios } from 'axios'
         console.log(postData)
     } */
 </script>
+<Modal show={$modal}>
+</Modal>
 
 <table>
     <thead>
@@ -56,7 +69,7 @@ import { axios } from 'axios'
                 <td>{roomtype.cost}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-primary" >Edit</button>
+                        <button type="button" class="btn btn-primary" on:click={showModal(roomtype.id)} >Edit</button>
                         <button type="button" class="btn btn-primary-red" on:click|preventDefault={() => deleteRoom(roomtype.id)}>Delete</button>
                       </div>
                 </td>
@@ -64,6 +77,8 @@ import { axios } from 'axios'
         {/each}
     </tbody>
 </table>
+
+
 
 <style>
     table{

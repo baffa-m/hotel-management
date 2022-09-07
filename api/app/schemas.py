@@ -42,12 +42,23 @@ class RoomTypeBase(BaseModel):
         orm_mode = True
 
 
+
 class RoomBase(BaseModel):
     room_name: str
     room_typeid: int
     available: bool
     class Config():
         orm_mode = True
+        
+class RoomUpdate(BaseModel):
+    available: bool
+    checked: bool
+    
+    
+class RoomTypeUpdate(BaseModel):
+    description: str
+    cost: int
+    
     
 class Room(RoomBase):
     class Config:
@@ -55,7 +66,9 @@ class Room(RoomBase):
     
 class ListRoom(Room):
     id: int
+    checked: bool
     room_type: RoomTypes
+    
     
     class Config():
         orm_mode = True
@@ -64,6 +77,8 @@ class GuestBase(BaseModel):
     name: str
     address: str
     phone_no: str
+    class Config(): 
+        orm_mode =True
     
 
 class BookingsBase(BaseModel):
@@ -74,12 +89,27 @@ class BookingsBase(BaseModel):
     total_price: int
     payment_status: bool
     
+    class Config():
+        orm_mode = True
+        
+class Booking(BookingsBase):
+    booking_date: date
+    class Config:
+        orm_mode = True
+        
+class BookingList(Booking):
+    id: int
+    guest: GuestBase
+    
+    class Config():
+        orm_mode = True
+    
     
 class HallBookingsBase(BaseModel):
     hall_id: int
     guest_id: int
-    date_from: date
-    date_to: date
+    checkin_date: date
+    checkout_date: date
     total_price: int
     payment_status: bool
 
@@ -88,6 +118,7 @@ class HallBase(BaseModel):
     hall_name: str
     seats: int
     cost: int
+    booked: bool
     
 class Rooms(BaseModel):
     room: RoomBase
