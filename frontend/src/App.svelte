@@ -42,7 +42,7 @@ const options = [
 		{ tab: 'Hall', component: HallBooking },
 	];
 
-	let selected = options[1];
+	let selected = options[0];
 
 
 </script>

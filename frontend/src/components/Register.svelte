@@ -10,7 +10,7 @@ import axios from "axios";
     }
 
     const formHandler = () => {
-        axios.post('http://localhost:8000/user', postData)
+        axios.post('https://ghwtjp.deta.dev/user', postData)
         .then((response) => {
             console.log(response)
         }, (error) => {

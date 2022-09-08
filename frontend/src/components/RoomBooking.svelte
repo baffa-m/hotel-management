@@ -2,12 +2,10 @@
 import Tabs from "./shared/Tabs.svelte"
 import Customer from "./Customer.svelte"
 import Button from "./shared/Button.svelte"
-import Modal from "./shared/Modal.svelte"
 import Rooms from "./Rooms.svelte"
 import Booking from "./Booking.svelte"
-import Summary from "./Summary.svelte"
-import { createEventDispatcher } from 'svelte'
 import { onMount } from "svelte";
+import axios from "axios"
 
 
     $: guests = ''
@@ -79,15 +77,23 @@ import { onMount } from "svelte";
         postData.total_price = bookinginfo.total_price
         postData.payment_status = false
 
-        const res = await fetch('http://localhost:8000/reservations/', {
+        const res = await fetch('https://ghwtjp.deta.dev/reservations/', {
             method: 'POST',
             headers : { "content-type" : "application/json"},
             body: JSON.stringify(postData)
     
         })
         const json = await res.json()
-        result = JSON.stringify(json) 
-        activeItem === 'Personal Info'
+        result = JSON.stringify(json)
+        console.log(postData)
+        
+        try {
+            axios.patch(`https://ghwtjp.deta.dev/room/${postData.room_id}`, {available: false, checked: false})
+        } catch (e) {
+            console.log(e)
+        }
+
+        activeItem = 'Personal Details'
     }
 
    

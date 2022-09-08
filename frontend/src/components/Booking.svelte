@@ -77,15 +77,18 @@ function formatDate(date) {
         <tr>
             <th>Check-in Date</th>
             <td><input type="date" name="checkin date" min={formatDate(new Date())} class="form-control" bind:value={fields.chekin_date}></td>
-            <div class="errors">{err.chekin}</div>
+        </tr>
+        <tr>
+            <th></th>
+            <td><div class="errors">{err.chekin}</div></td>
         </tr>
         <tr>
             <th>Check-out Date</th>
             <td><input type="date" name="checkout date" min={formatDate(new Date())} class="form-control" bind:value={fields.chekout_date}></td>
-            <div class="errors">{err.checkout}</div>
         </tr>
         <tr>
-            
+            <th></th>
+            <td><div class="errors">{err.checkout}</div></td>
         </tr>
         
     </table>

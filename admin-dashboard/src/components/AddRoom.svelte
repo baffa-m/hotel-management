@@ -14,7 +14,7 @@
     let roomTypes = []
 
     onMount(async () => {
-        const res = await fetch('http://localhost:8000/room-type/')
+        const res = await fetch('https://ghwtjp.deta.dev/room-type/')
         roomTypes = await res.json()
         console.log(roomTypes)
     })
@@ -22,7 +22,7 @@
     
     const formHandler = async () => {  
     
-        const res = await fetch('http://localhost:8000/room/', {
+        const res = await fetch('https://ghwtjp.deta.dev/room/', {
             method: 'POST',
             headers : { "content-type" : "application/json"},
             body: JSON.stringify(postData)

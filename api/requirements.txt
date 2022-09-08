@@ -1,0 +1,11 @@
+uvicorn[all]
+bcrypt
+fastapi
+passlib
+pydantic
+PyJWT
+PyMySQL
+python-jose
+SQLAlchemy
+mysqlclient
+python-multipart

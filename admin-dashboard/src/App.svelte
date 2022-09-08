@@ -15,7 +15,7 @@ import BookedRooms from "./components/BookedRooms.svelte";
 	
 
 	let items = ['Home', 'Bookings', 'Booked Rooms', 'Guests', 'Room Types', 'Rooms', 'Hall']
-	let activeItem = 'Bookings'
+	let activeItem = 'Room Types'
 
 	const tabChange = (e) => {
 		activeItem = e.detail;
@@ -26,6 +26,7 @@ import BookedRooms from "./components/BookedRooms.svelte";
 <Header />
 <Tabs {activeItem} {items} on:tabChange={tabChange} />
 <main>
+	
 	<!--<div class="card-field">
 		<Card>
 			<Login />

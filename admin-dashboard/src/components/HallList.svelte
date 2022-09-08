@@ -9,14 +9,14 @@
     let errMsg = ''
 
     onMount(async () => {
-        const res = await fetch('http://localhost:8000/hall/')
+        const res = await fetch('https://ghwtjp.deta.dev/hall/')
         halls = await res.json()
         console.log(halls)
     })
 
     const deleteHall = async (id) => {
         try {
-            await axios.delete(`http://localhost:8000/hall/${id}/`)
+            await axios.delete(`https://ghwtjp.deta.dev/hall/${id}/`)
             halls = halls.filter((hall) => hall.id !== id)
             
         } catch (e) {
