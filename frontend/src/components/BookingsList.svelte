@@ -49,5 +49,7 @@
             text-align: center;
             border: 1px solid;
         }
-        
+        .but{
+            text-align: right;
+        }
     </style>

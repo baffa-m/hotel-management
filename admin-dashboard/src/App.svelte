@@ -1,7 +1,6 @@
 <script>
 import AddRoom from "./components/AddRoom.svelte";
 import Bookings from "./components/Bookings.svelte";
-import CreateRoom from "./components/CreateRoom.svelte";
 import Guests from "./components/Guests.svelte";
 import Header from "./components/Header.svelte";
 import Rooms from "./components/Rooms.svelte";

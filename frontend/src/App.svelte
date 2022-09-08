@@ -8,27 +8,48 @@ import HallBooking from "./components/HallBooking.svelte";
 import PoolBooking from "./components/PoolBooking.svelte";
 import Modal from "./components/shared/Modal.svelte"
 import Login from "./components/Login.svelte";
+import AddRoom from "./components/AddRoom.svelte";
+import Bookings from "./components/Bookings.svelte";
+import CreateRoom from "./components/CreateRoom.svelte";
+import Guests from "./components/Guests.svelte";
+import Rooms from "./components/Rooms.svelte";
+import RoomType from "./components/RoomType.svelte";
+import Hall from "./components/Hall.svelte";
+import Home from "./components/shared/Home.svelte";
+import BookedRooms from "./components/BookedRooms.svelte";
+import RoomsTab from "./components/RoomsTab.svelte";
+import HallTab from "./components/HallTab.svelte";
+import SideTab from "./components/shared/SideTab.svelte"
 
 
 
-let items = ['Home', 'About', 'Register', 'Login']
-let activeItem = 'Login'
+let items = ['Home', 'About', 'Register', 'Admin']
+let activeItem = 'Admin'
+
+let tabs = ['Home', 'Bookings', 'Booked Rooms', 'Guests', 'Room Types', 'Rooms', 'Hall']
+let activeTab = 'Home'
+
+const itemChange = (e) => {
+	activeItem = e.detail
+}
 
 const tabChange = (e) => {
-	activeItem = e.detail
+	activeTab = e.detail
 }
 
 const options = [
 		{ tab: 'Room',   component: RoomBooking   },
 		{ tab: 'Hall', component: HallBooking },
-		{ tab: 'Pool',  component: PoolBooking  },
 	];
 
 	let selected = options[1];
 
 
 </script>
-<Tabs {items} {activeItem} on:tabChange={tabChange}></Tabs>
+<Tabs {items} {activeItem} on:tabChange={itemChange}></Tabs>
+{#if activeItem === 'Admin'}
+<SideTab items={tabs} activeItem={activeTab} on:tabChange={tabChange}></SideTab>
+{/if}
 <main>
 	<Card>
 	{#if activeItem === 'Home'}
@@ -39,8 +60,23 @@ const options = [
 		</select>
 		<br />		
 		<svelte:component this={selected.component} />
-	{:else if activeItem === 'Login'}
-		<Login />
+	{:else if activeItem === 'Admin'}
+		{#if activeTab === 'Home'}
+				<Home />
+		{:else if activeTab === 'Bookings'}
+				<Bookings />
+		{:else if activeTab === 'Booked Rooms'}
+			<BookedRooms />
+		{:else if activeTab === 'Guests'}
+				<Guests />
+		{:else if activeTab === 'Room Types'}
+				<RoomType />
+		{:else if activeTab === 'Rooms'}
+			<RoomsTab />
+		{:else if activeTab === 'Hall'}
+				<HallTab />
+		{/if}
+	
 	{/if}
 	</Card>
 </main>
