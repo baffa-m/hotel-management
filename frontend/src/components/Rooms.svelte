@@ -60,10 +60,5 @@ import RoomType from '../../../admin-dashboard/src/components/RoomType.svelte';
       </div>
 </main>
 <style>
-    .main {
-		width: 100%;
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-		grid-gap: 8px;
-	}
+    
 </style>
