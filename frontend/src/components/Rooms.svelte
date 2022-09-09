@@ -1,7 +1,7 @@
 <script>
     import axios from 'axios'
     import { onMount } from 'svelte';
-import RoomType from '../../../admin-dashboard/src/components/RoomType.svelte';
+    import RoomType from './RoomType.svelte';
     import MiniCard from './shared/MiniCard.svelte'
     import Button from './shared/Button.svelte'
     import { createEventDispatcher } from 'svelte'

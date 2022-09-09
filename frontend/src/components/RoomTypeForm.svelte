@@ -33,7 +33,7 @@ const formHandler = async () => {
         errors.cost = ''
     }
 
-    const res = await fetch('http://localhost:8000/room-type/', {
+    const res = await fetch('https://ghwtjp.deta.dev/room-type/', {
         method: 'POST',
         headers : { "content-type" : "application/json"},
         body: JSON.stringify(postData)

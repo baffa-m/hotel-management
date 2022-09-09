@@ -6,7 +6,7 @@ import RoomTypeList from './RoomTypeList.svelte';
     import Button from "./shared/Button.svelte";
     import Card from './shared/Card.svelte';
 
-    let activeTab = RoomTypeList
+    export let activeTab = RoomTypeList
 
     
 </script> 

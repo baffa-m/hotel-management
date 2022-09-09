@@ -1,19 +1,19 @@
 <script>
 import axios from 'axios';
-
 import { onMount } from 'svelte'
+import Button from './shared/Button.svelte'
 
 let rooms = [] 
 
 onMount(async () => {
-    const res = await fetch('http://localhost:8000/room/')
+    const res = await fetch('https://ghwtjp.deta.dev/room/')
     rooms = await res.json()
     console.log(rooms)
 })
 
 const checkOutRoom = async (id) => {
     try {
-        await axios.patch('http://localhost:8000/room/', {available:0})
+        await axios.patch('https://ghwtjp.deta.dev/room/', {available:0})
     } catch(e) {
         console.log(e)
     }
@@ -29,24 +29,42 @@ const checkOutRoom = async (id) => {
                 <th>Room Name</th>
                 <th>Room Type</th>
                 <th>Status</th>
-                <th>Actions</th>
+                <th>Check-in</th>
+                <th>Check-Out</th>
             </tr>
         </thead>
         <tbody>
             {#each rooms as room}
-            {#if room.available == 1}
                 <tr>
                     <td>{room.id}</td>
                     <td>{room.room_name}</td>
                     <td>{room.room_type.room_type}</td>
-                    <td></td>
                     <td>
+                        {#if !room.available}
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <Button inverse>Booked</Button>
+                        </div>
+                        {:else}
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <Button inverse>Available</Button>
+                        </div>
+                        {/if}
+                    </td>
+                    <td>
+                        {#if !room.available && !room.checked}
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary-red" on:click|preventDefault={() => checkOutRoom(room.id)}>Check-in</button>
+                        </div>
+                        {/if}
+                    </td>
+                    <td>
+                        {#if room.checked}
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-primary-red" on:click|preventDefault={() => checkOutRoom(room.id)}>Checkout</button>
-                          </div>
+                        </div>
+                        {/if}
                     </td>
                 </tr>
-            {/if}
             {/each}
         </tbody>
     </table>

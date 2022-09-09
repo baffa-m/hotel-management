@@ -1,6 +1,7 @@
 <script>
 import Button from "./shared/Button.svelte";
 import axios from 'axios';
+import Tabs from "./shared/Tabs.svelte"
 
         let items = ['Login', 'Register']
         let activeItem = 'Register'
@@ -55,3 +56,4 @@ import axios from 'axios';
         <Button>Login</Button>
     </div>
 </form>
+{/if}

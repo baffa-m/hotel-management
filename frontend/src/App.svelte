@@ -1,21 +1,14 @@
 <script>
 import Footer from "./components/Footer.svelte";
-import Header from "./components/Header.svelte";
 import Card from "./components/shared/Card.svelte";
 import Tabs from "./components/shared/Tabs.svelte";
 import RoomBooking from "./components/RoomBooking.svelte";
 import HallBooking from "./components/HallBooking.svelte";
-import PoolBooking from "./components/PoolBooking.svelte";
-import Modal from "./components/shared/Modal.svelte"
 import Login from "./components/Login.svelte";
-import AddRoom from "./components/AddRoom.svelte";
 import Bookings from "./components/Bookings.svelte";
-import CreateRoom from "./components/CreateRoom.svelte";
 import Guests from "./components/Guests.svelte";
-import Rooms from "./components/Rooms.svelte";
 import RoomType from "./components/RoomType.svelte";
-import Hall from "./components/Hall.svelte";
-import Home from "./components/shared/Home.svelte";
+import Home from "./components/Home.svelte";
 import BookedRooms from "./components/BookedRooms.svelte";
 import RoomsTab from "./components/RoomsTab.svelte";
 import HallTab from "./components/HallTab.svelte";
@@ -23,7 +16,7 @@ import SideTab from "./components/shared/SideTab.svelte"
 
 
 
-let items = ['Home', 'About', 'Register', 'Admin']
+let items = ['Home', 'About', 'Admin']
 let activeItem = 'Admin'
 
 let tabs = ['Home', 'Bookings', 'Booked Rooms', 'Guests', 'Room Types', 'Rooms', 'Hall']
