@@ -4,6 +4,8 @@
 
 <style>
     .card{
+        position: fixed;
+        z-index: auto;
         background: #fff;
         padding: 20px;
         border-radius: 6px;

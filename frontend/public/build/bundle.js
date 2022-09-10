@@ -1131,7 +1131,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			if (default_slot) default_slot.c();
-    			attr_dev(div, "class", "card svelte-lny2t5");
+    			attr_dev(div, "class", "card svelte-juqhfq");
     			add_location(div, file$w, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -15111,8 +15111,8 @@ var app = (function () {
     			if (switch_instance) create_component(switch_instance.$$.fragment);
     			switch_instance_anchor = empty();
     			if (/*selected*/ ctx[2] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[8].call(select));
-    			add_location(select, file, 48, 2, 1458);
-    			add_location(br, file, 53, 2, 1597);
+    			add_location(select, file, 48, 2, 1457);
+    			add_location(br, file, 53, 2, 1596);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, select, anchor);
@@ -15507,7 +15507,7 @@ var app = (function () {
     			t = text(t_value);
     			option.__value = /*option*/ ctx[9];
     			option.value = option.__value;
-    			add_location(option, file, 50, 4, 1524);
+    			add_location(option, file, 50, 4, 1523);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -15669,7 +15669,7 @@ var app = (function () {
     			t2 = space();
     			create_component(footer.$$.fragment);
     			attr_dev(main, "class", "svelte-njitg3");
-    			add_location(main, file, 45, 0, 1409);
+    			add_location(main, file, 45, 0, 1408);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -15763,7 +15763,7 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
     	let items = ['Home', 'About', 'Admin'];
-    	let activeItem = 'Admin';
+    	let activeItem = 'Home';
     	let tabs = ['Home', 'Bookings', 'Booked Rooms', 'Guests', 'Room Types', 'Rooms', 'Hall'];
     	let activeTab = 'Home';
 
