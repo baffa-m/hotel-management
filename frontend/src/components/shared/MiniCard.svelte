@@ -8,7 +8,7 @@
         padding: 20px;
         border-radius: 6px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        height: 100px;
+        height: 130px;
         width: 150px;
     }
 </style>

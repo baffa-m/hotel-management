@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { onMount } from 'svelte'
+import { DoubleBounce } from 'svelte-loading-spinners'
 import Button from './shared/Button.svelte'
 
 let rooms = [] 
@@ -9,6 +10,7 @@ onMount(async () => {
     const res = await fetch('https://ghwtjp.deta.dev/room/')
     rooms = await res.json()
     console.log(rooms)
+    
 })
 
 const checkOutRoom = async (id) => {
@@ -19,9 +21,21 @@ const checkOutRoom = async (id) => {
     }
 }
 
+const checkInRoom = async (id) => {
+    try {
+        await axios.patch('https://ghwtjp.deta.dev/room/', {available:1})
+        await axios.patch
+    } catch(e) {
+        console.log(e)
+    }
+}
+
 </script>
 
 <main>
+    {#await rooms}
+    <DoubleBounce size="60" color="#FF3E00" unit="px" duration="1s"></DoubleBounce>
+    {:then rooms}
     <table>
         <thead>
             <tr>
@@ -68,6 +82,8 @@ const checkOutRoom = async (id) => {
             {/each}
         </tbody>
     </table>
+    {/await}
+    
     </main>
     
     <style>

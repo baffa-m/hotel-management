@@ -18,7 +18,6 @@ import Button from './shared/Button.svelte'
         <svelte:component this={activeTab} /> 
         <br>
         <div on:click={() => (activeTab = AddBookings)}>
-            <Button>Add Booking</Button>
         </div>
     
     </main>
