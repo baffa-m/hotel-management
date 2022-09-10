@@ -15,6 +15,7 @@ from routers import user, hotel, hall
 app = FastAPI()
 
 origins = [
+    'https://631c921e780f1a44bccb34dd--vermillion-naiad-820882.netlify.app',
     'http://localhost:8080',
     'http://localhost:5000'
 ]

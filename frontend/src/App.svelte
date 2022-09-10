@@ -17,7 +17,7 @@ import SideTab from "./components/shared/SideTab.svelte"
 
 
 let items = ['Home', 'About', 'Admin']
-let activeItem = 'Admin'
+let activeItem = 'Home'
 
 let tabs = ['Home', 'Bookings', 'Booked Rooms', 'Guests', 'Room Types', 'Rooms', 'Hall']
 let activeTab = 'Home'
